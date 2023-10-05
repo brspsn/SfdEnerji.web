@@ -2,7 +2,8 @@
 
 namespace SfdEnerji.web.Areas.Admin.Controllers
 {
-    public class PageController : Controller
+    public class PageController : ControllerBase
+
     {
         public IActionResult Index()
         {

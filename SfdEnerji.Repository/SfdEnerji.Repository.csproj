@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SfdEnerji.Data\SfdEnerji.Data.csproj" />
+    <ProjectReference Include="..\SfdEnerji.Models\SfdEnerji.Models.csproj" />
+  </ItemGroup>
+
 </Project>

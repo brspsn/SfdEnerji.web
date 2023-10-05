@@ -2,7 +2,7 @@
 
 namespace SfdEnerji.web.Areas.Admin.Controllers
 {
-    public class ContactFormController : Controller
+    public class ContactFormController : ControllerBase
     {
         public IActionResult Index()
         {

@@ -2,7 +2,7 @@
 
 namespace SfdEnerji.web.Areas.Admin.Controllers
 {
-    public class ProjectController : Controller
+    public class ProjectController : ControllerBase
     {
         public IActionResult Index()
         {
