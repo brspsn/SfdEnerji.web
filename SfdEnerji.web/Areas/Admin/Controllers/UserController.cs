@@ -16,11 +16,12 @@ namespace SfdEnerji.web.Areas.Admin.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        [HttpGet]
         public IActionResult Index()
         {
             return View(); 
         }
+        [HttpGet]
+
         public IActionResult Login()
         {
             return View();
@@ -46,7 +47,8 @@ namespace SfdEnerji.web.Areas.Admin.Controllers
                 HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),new AuthenticationProperties { IsPersistent=loginDto.RememberMe });
-                return Ok();
+
+                return Ok("giriş başarılı");
             }
         }
     }
