@@ -15,13 +15,15 @@ namespace SfdEnerji.web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie("AdminLogin", options =>
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
                 options.LoginPath = "/Admin/Login/Index";
                 options.LogoutPath = "/Admin/Login/Logout";
                 options.AccessDeniedPath = "/Admin/Login/AccessDenied";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                
             });
             var app = builder.Build();
 
@@ -37,6 +39,7 @@ namespace SfdEnerji.web
             app.UseStaticFiles();
 
             app.UseRouting();
+
             app.UseAuthentication();
             app.UseAuthorization();
 

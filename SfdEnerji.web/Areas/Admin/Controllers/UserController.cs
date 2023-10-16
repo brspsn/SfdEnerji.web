@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SfdEnerji.Models;
 using SfdEnerji.Models.DTOs;
@@ -10,27 +11,28 @@ namespace SfdEnerji.web.Areas.Admin.Controllers
 {
     public class UserController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public UserController(IUnitOfWork unitOfWork)
+        public UserController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+
         }
         public IActionResult Index()
         {
             return View(); 
         }
-        [HttpGet]
 
+        [AllowAnonymous]
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Login(LoginDto loginDto)
         {
             //Dtodaki username ve password null değil mi 
-            AppUser user =_unitOfWork.Users.GetFirstOrDefault(u=>u.Name == loginDto.UserName&&u.Password==loginDto.Password);
+            AppUser user = unitOfWork.Users.GetFirstOrDefault(u=>u.Name == loginDto.UserName && u.Password==loginDto.Password);
             if (user==null)
             {
                 return BadRequest("Kullanıcı adı veya şifre hatalı");
