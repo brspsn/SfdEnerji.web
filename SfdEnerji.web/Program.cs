@@ -20,8 +20,8 @@ namespace SfdEnerji.web
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
-                options.LoginPath = "/Admin/Login/Index";
-                options.LogoutPath = "/Admin/Login/Logout";
+                options.LoginPath = "/Admin/User/Login";
+                options.LogoutPath = "/Admin/User/Logout";
                 options.AccessDeniedPath = "/Admin/Login/AccessDenied";
                 
             });

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using SfdEnerji.Models.DTOs;
+@model LoginDto
+@{
     Layout = null;
 };
 <!doctype html>
@@ -46,11 +48,11 @@
                                 <p class="text-muted">Sign in to continue to Minible.</p>
                             </div>
                             <div class="p-2 mt-4">
-                                <form action="index.html">
+                                <form method="post">
 
                                     <div class="mb-3">
                                         <label class="form-label" for="username">Username</label>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                        <input asp-for="UserName" class="form-control" id="username" placeholder="Enter username">
                                     </div>
 
                                     <div class="mb-3">
@@ -58,7 +60,7 @@
                                             <a href="auth-recoverpw.html" class="text-muted">Forgot password?</a>
                                         </div>
                                         <label class="form-label" for="userpassword">Password</label>
-                                        <input type="password" class="form-control" id="userpassword" placeholder="Enter password">
+                                        <input asp-for="Password" type="password" class="form-control" id="userpassword" placeholder="Enter password">
                                     </div>
 
                                     <div class="form-check">
