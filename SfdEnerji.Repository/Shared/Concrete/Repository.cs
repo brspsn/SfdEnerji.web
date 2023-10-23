@@ -32,7 +32,7 @@ namespace SfdEnerji.Repository.Shared.Concrete
             entity.ModifitedDate = DateTime.Now;
             _dbSet.Update(entity);
         }
-        public void DeLeteById(int id)
+        public void DeleteById(int id)
         {
             T entity = _dbSet.Find(id);
             entity.IsDeleted = true;

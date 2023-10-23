@@ -15,7 +15,7 @@ namespace SfdEnerji.Repository.Shared.Abstract
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);
-        void DeLeteById(int id);
+        void DeleteById(int id);
         T GetById(int id);
         T GetFirstOrDefault(Expression<Func<T,bool>>filter);
 

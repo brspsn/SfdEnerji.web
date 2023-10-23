@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SfdEnerji.Data\SfdEnerji.Data.csproj" />
     <ProjectReference Include="..\SfdEnerji.Repository\SfdEnerji.Repository.csproj" />
+    <ProjectReference Include="..\SfdEnerji.Utility\SfdEnerji.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>

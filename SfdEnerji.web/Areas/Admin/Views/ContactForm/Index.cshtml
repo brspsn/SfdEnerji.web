@@ -1,4 +1,12 @@
-﻿<div class="row">
+﻿@section Styles{
+    <style>
+        .swal-wide{
+            width:!important;
+        }
+    </style>
+}
+
+<div class="row">
 
     <div class="col-lg-12">
         <div class="card border border-primary">
@@ -7,68 +15,93 @@
             </div><!-- end card-header -->
             <div class="card-body">
 
-                <table itemid="tblContactForms" class="table table-striped table-bordered">
+                <table id="tblContactForms" class="table table-striped table-bordered">
                 </table>
 
             </div><!-- end card-body -->
         </div><!-- end card -->
     </div>
 
-
 </div>
-
 @section Scripts{
     <script>
         $(document).ready(function () {
-            $("tblContactForms").DataTables({
+
+            $("#tblContactForms").DataTable({
                 ajax: '@Url.Action("GetAll","ContactForm")',
-                colums: [
+                columns: [
+                    {data:"id", visible:false},
+                    { data: "messageLenght", title: 'Mesaj Uzunlugu', visible: false },
                     { data: "name", title: 'Ad Soyad' },
                     { data: "email", title: 'Email' },
                     { data: "subject", title: 'Konu' },
-                    { data: "message", title: 'Mesaj' },
-                    { data: "phone", title: ' Telefon ' },
+                    { data: "message", title: 'Mesaj', render: function (data, type, row) { 
+                    
+                            if (parseInt(row.messageLenght) > 50)
+                                return `${data}... <a href="#" onclick="readMessage(${row.id})">devamını oku</a>`
+                        else
+                            return data;
+                    } },
+                    { data: "phone", title: 'Telefon' },
                     {
                         data: "id",
                         render: function (data) {
                             return `<a href="#" onclick="deleteContactForm(${data})" class="btn btn-sm btn-danger">Sil</a>`;
                         }
-                    }
-                ],
-                language: { "url": "//cdn.datatables.net/plug-ins/1.10.25/il8n/Turkish.json" }
+                    }],
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
+                }
             });
-
         });
 
         function deleteContactForm(id) {
+
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("DeleteById","ContactForm")',
                 data: { contactFormId: id },
                 success: function (data) {
-                    if (data.result) {
-                        swal.fire({
-                            icon: 'success',
-                            title: 'Başarılı',
-                            text: 'Mesaj silindi',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Başarılı',
+                        text: 'Mesaj silindi',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                         $("#tblContactForms").DataTable().ajax.reload();
-                    }
-                    else {
-                        swal.fire({
-                            icon: 'error',
-                            title: 'Hata',
-                            text: 'Mesaj silinemedi',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    }
-                }
+                   
 
-            });
-        };
+                }
+            })
+
+        }
+
+        function readMessage(contactFormId)
+        {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ReadMessage","ContactForm")',
+                data: { contactFormId: contactFormId },
+                success: function (data) {
+
+                    Swal.fire({
+                        
+                        title: 'Mesaj İçeriği',
+                        text: data,
+                        customClass:'swal-wide',
+                        showConfirmButton: true,
+                        
+                    });
+                   
+
+
+                }
+            })
+
+        }
+
 
 
 

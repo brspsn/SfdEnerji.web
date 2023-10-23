@@ -50,7 +50,7 @@ namespace SfdEnerji.web.Areas.Admin.Controllers
 
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),new AuthenticationProperties { IsPersistent=loginDto.RememberMe });
 
-                return Ok("giriş başarılı");
+                return RedirectToAction("Index", "Dashboard");
             }
         }
     }
